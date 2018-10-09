@@ -65,7 +65,7 @@
 #### Respuesta
 - 200 OK
   - `[ {id:String,title:String} ]`
-  - 404 NOT_FOUND
+- 404 NOT_FOUND
 ---
 ### PATCH /videogames/{id}/category
 #### Parámetros del cuerpo
