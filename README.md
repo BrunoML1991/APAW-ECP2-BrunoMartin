@@ -34,12 +34,13 @@
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### POST /suggestions
+### POST /iconicCharacter
 #### Parámetros del cuerpo
-- `negative`: Boolean (**requerido**)
-- `description`: String (**requerido**)
+- `name`: String (**requerido**)
+- `role`: String
 #### Respuesta
 - 200 OK
+    - `id`: String
 - 403 BAD_REQUEST
 ---
 ### POST /themes
