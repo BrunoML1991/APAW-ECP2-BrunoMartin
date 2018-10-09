@@ -1,5 +1,6 @@
 package api.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IconicCharacter {
@@ -7,7 +8,7 @@ public class IconicCharacter {
     private String id;
     private String name;
     private String role;
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -34,4 +35,23 @@ public class IconicCharacter {
         return reviews;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
+    public void removeReview (Review review){
+        this.reviews.remove(Integer.parseInt(review.getId()));
+    }
 }

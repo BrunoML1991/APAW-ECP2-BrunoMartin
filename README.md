@@ -12,7 +12,7 @@
 ![themes-architecture-diagram](https://github.com/miw-upm/APAW-themes-layers/blob/develop/docs/themes-entities-class-diagram.png)
 
 ## API
-### POST /review
+### POST /reviews
 #### Parámetros del cuerpo
 - `title`: String (**requerido**)
 - `text`: String
@@ -23,7 +23,7 @@
   - `date`: LocalDateTime
 - 403 BAD_REQUEST
 ---
-### PUT /review/{id}
+### PUT /reviews/{id}
 #### Parámetros del cuerpo
 - `title`: String (**requerido**)
 - `text`: String
@@ -34,7 +34,7 @@
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### POST /iconicCharacter
+### POST /iconicCharacters
 #### Parámetros del cuerpo
 - `name`: String (**requerido**)
 - `role`: String
@@ -43,51 +43,40 @@
     - `id`: String
 - 403 BAD_REQUEST
 ---
-### POST /themes
+### POST /videogames
 #### Parámetros del cuerpo
-- `reference`: String (**requerido**)
+- `title`: String (**requerido**)
+- `synopsis`: String
 - `category`: Category
-- `userId`: String
+- `company`: String
+- `iconicCharacterId`: String (**requerido**)
 #### Respuesta
 - 200 OK
   - `id`: String
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### GET /themes
+### DELETE /videogame/{id}
 #### Respuesta
 - 200 OK
-  - `[ {id:String,reference:String} ]`
+- 404 NOT_FOUND
 ---
-### DELETE /themes/{id}
+### GET /videogame
 #### Respuesta
 - 200 OK
+  - `[ {id:String,title:String} ]`
+  - 404 NOT_FOUND
 ---
-### POST /themes/{id}/votes
+### PATCH /videogames/{id}/category
 #### Parámetros del cuerpo
-- `value`: Integer (**requerido**)
+- `category`: Category (**requerido**)
 #### Respuesta
 - 200 OK
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### GET /themes/{id}/average
+### GET /reviews/search?q=rating:>=7
 #### Respuesta
 - 200 OK
-  - `average`: Double
-- 404 NOT_FOUND
----
-### PATH /themes/{id}/category
-#### Parámetros del cuerpo
-- `category`: String (**requerido**)
-#### Respuesta
-- 200 OK
+  - `[ {id:String,title:String,rating:int} ]`
 - 403 BAD_REQUEST
-- 404 NOT_FOUND
----
-### GET /themes/search?q=average:>=3
-#### Respuesta
-- 200 OK
-  - `[ {id:String,reference:String} ]`
-- 403 BAD_REQUEST
-

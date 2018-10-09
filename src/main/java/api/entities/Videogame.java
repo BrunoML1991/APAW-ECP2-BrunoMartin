@@ -30,6 +30,30 @@ public class Videogame {
         return company;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setIconicCharacter(IconicCharacter iconicCharacter) {
+        this.iconicCharacter = iconicCharacter;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Videogame{" +
