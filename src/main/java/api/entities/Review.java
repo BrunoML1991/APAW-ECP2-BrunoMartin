@@ -11,11 +11,8 @@ public class Review {
     private LocalDateTime date;
     public static final int LIMIT_RATING = 10;
 
-    public Review (String title, String text, int rating){
+    public Review(String title) {
         this.title = title;
-        this.text = text;
-        this.rating = rating;
-        this.setDate();
     }
 
     public String getId() {
@@ -54,7 +51,9 @@ public class Review {
     }
 
     public void setRating(int rating) {
-        assert 0 >= rating && rating <= this.LIMIT_RATING;
+        if (0 > rating || rating > Review.LIMIT_RATING) {
+            throw new IllegalArgumentException("Invalid rating" + rating);
+        }
         this.rating = rating;
     }
 

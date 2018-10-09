@@ -20,15 +20,17 @@
 #### Respuesta
 - 200 OK
   - `id`: String
-  -`date`: LocalDateTime
+  - `date`: LocalDateTime
 - 403 BAD_REQUEST
 ---
-### PUT /users/{id}
+### PUT /review/{id}
 #### Parámetros del cuerpo
-- `nick`: String (**requerido**)
-- `email`: String
+- `title`: String (**requerido**)
+- `text`: String
+- `rating`: int (**requerido**)
 #### Respuesta
 - 200 OK
+    - `date`: LocalDateTime
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
