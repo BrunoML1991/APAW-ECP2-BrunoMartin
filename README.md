@@ -9,7 +9,7 @@
 * GitHub
 
 ## Diseño de entidades
-![themes-architecture-diagram](https://github.com/miw-upm/APAW-themes-layers/blob/develop/docs/themes-entities-class-diagram.png)
+![Entidades](https://github.com/BrunoML1991/APAW-ECP2-BrunoMartin/blob/master/docs/Entidades.png)
 
 ## API
 ### POST /review
