@@ -30,7 +30,7 @@ public class Dispatcher {
                 default:
                     throw new RequestInvalidException("method error: " + request.getMethod());
             }
-        }catch (ArgumentNotValidException|IllegalArgumentException|RequestInvalidException exception){
+        } catch (ArgumentNotValidException | IllegalArgumentException | RequestInvalidException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.BAD_REQUEST);
         } catch (Exception exception) {  // Unexpected

@@ -7,7 +7,7 @@ public class ReviewResponseIdAndDateDto {
     private String id;
     private LocalDateTime date;
 
-    public ReviewResponseIdAndDateDto (String id, LocalDateTime date){
+    public ReviewResponseIdAndDateDto(String id, LocalDateTime date) {
         this.id = id;
         this.date = date;
     }

@@ -19,20 +19,30 @@ public class Review {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public Review setText(String text) {
+        this.text = text;
+        return this;
+    }
+
+    public Review setRating(int rating) {
+        if (0 > rating || rating > Review.LIMIT_RATING) {
+            throw new IllegalArgumentException("Invalid rating" + rating);
+        }
+        this.rating = rating;
+        return this;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Review setDate() {
+        this.date = LocalDateTime.now();
+        return this;
     }
 
     @Override
@@ -44,33 +54,6 @@ public class Review {
                 ", rating=" + rating +
                 ", date=" + date +
                 '}';
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setRating(int rating) {
-        if (0 > rating || rating > Review.LIMIT_RATING) {
-            throw new IllegalArgumentException("Invalid rating" + rating);
-        }
-        this.rating = rating;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setDate() {
-        this.date = LocalDateTime.now();
     }
 
 }

@@ -9,9 +9,7 @@ public class ReviewBusinessController {
 
     public Object create (ReviewDto reviewDto){
         Review review = new Review(reviewDto.getTitle());
-        review.setRating(reviewDto.getRating());
-        review.setText(reviewDto.getText());
-        review.setDate();
+        review.setRating(reviewDto.getRating()).setText(reviewDto.getText()).setDate();
         DaoFactory.getFactory().getReviewDao().save(review);
         return new ReviewResponseIdAndDateDto(review.getId(),review.getDate());
     }

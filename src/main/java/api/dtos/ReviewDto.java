@@ -33,8 +33,8 @@ public class ReviewDto {
         return rating;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -46,30 +46,6 @@ public class ReviewDto {
                 ", rating=" + rating +
                 ", date=" + date +
                 '}';
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setDate() {
-        this.date = LocalDateTime.now();
     }
 
 }

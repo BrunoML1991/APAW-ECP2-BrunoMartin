@@ -10,24 +10,24 @@ public class ReviewApiController {
 
     private ReviewBusinessController reviewBusinessController = new ReviewBusinessController();
 
-    private void validate (Object property, String message){
-        if(property == null){
-            throw new ArgumentNotValidException (message+" is NULL");
-        }
-    }
-
-    private void validateRating (int rating){
-        if (0 > rating || rating > ReviewDto.LIMIT_RATING){
-            throw new IllegalArgumentException("Invalid rating " + rating);
-        }
-    }
-
-    public Object create (ReviewDto reviewDto){
-        this.validate(reviewDto,"reviewDto");
-        this.validate(reviewDto.getTitle(),"title");
-        this.validate(reviewDto.getRating(),"rating");
+    public Object create(ReviewDto reviewDto) {
+        this.validate(reviewDto, "reviewDto");
+        this.validate(reviewDto.getTitle(), "title");
+        this.validate(reviewDto.getRating(), "rating");
         this.validateRating(reviewDto.getRating());
         return reviewBusinessController.create(reviewDto);
+    }
+
+    private void validate(Object property, String message) {
+        if (property == null) {
+            throw new ArgumentNotValidException(message + " is NULL");
+        }
+    }
+
+    private void validateRating(int rating) {
+        if (0 > rating || rating > ReviewDto.LIMIT_RATING) {
+            throw new IllegalArgumentException("Invalid rating " + rating);
+        }
     }
 
 }
