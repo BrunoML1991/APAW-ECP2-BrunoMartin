@@ -3,6 +3,7 @@ package api;
 import api.apiControllers.ReviewApiController;
 import api.dtos.ReviewDto;
 import api.exceptions.ArgumentNotValidException;
+import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
 import http.HttpRequest;
 import http.HttpResponse;
@@ -22,7 +23,8 @@ public class Dispatcher {
                 case GET:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 case PUT:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doPut(request, response);
+                    break;
                 case PATCH:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 case DELETE:
@@ -33,6 +35,9 @@ public class Dispatcher {
         } catch (ArgumentNotValidException | IllegalArgumentException | RequestInvalidException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.BAD_REQUEST);
+        } catch (NotFoundException exception) {
+            response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
+            response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
             exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
@@ -44,8 +49,20 @@ public class Dispatcher {
         if (httpRequest.isEqualsPath(ReviewApiController.REVIEWS)) {
             httpResponse.setBody(this.reviewApiController.create((ReviewDto) httpRequest.getBody()));
         } else {
-            throw new RequestInvalidException("method error: " + httpRequest.getMethod());
+            this.requestInvalid(httpRequest);
         }
+    }
+
+    private void doPut(HttpRequest httpRequest, HttpResponse httpResponse) {
+        if (httpRequest.isEqualsPath(ReviewApiController.REVIEWS + ReviewApiController.ID_ID)) {
+            httpResponse.setBody(this.reviewApiController.update(httpRequest.getPath(1), (ReviewDto) httpRequest.getBody()));
+        } else {
+            this.requestInvalid(httpRequest);
+        }
+    }
+
+    private void requestInvalid(HttpRequest request) {
+        throw new RequestInvalidException("method error: " + request.getMethod());
     }
 
 }

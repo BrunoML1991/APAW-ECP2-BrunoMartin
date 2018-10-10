@@ -12,6 +12,10 @@ public class ReviewResponseIdAndDateDto {
         this.date = date;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "ReviewResponseIdAndDateDto{" +

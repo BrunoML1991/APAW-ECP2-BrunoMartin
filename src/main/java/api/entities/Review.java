@@ -45,6 +45,11 @@ public class Review {
         return this;
     }
 
+    public Review setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Review{" +
