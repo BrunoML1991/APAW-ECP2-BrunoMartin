@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 
 public class ReviewBusinessController {
 
-    public Object create (ReviewDto reviewDto){
+    public Object create(ReviewDto reviewDto) {
         Review review = new Review(reviewDto.getTitle());
         review.setRating(reviewDto.getRating()).setText(reviewDto.getText()).setDate();
         DaoFactory.getFactory().getReviewDao().save(review);
-        return new ReviewResponseIdAndDateDto(review.getId(),review.getDate());
+        return new ReviewResponseIdAndDateDto(review.getId(), review.getDate());
     }
 
-    public LocalDateTime update (String id, ReviewDto reviewDto){
-        Review review = DaoFactory.getFactory().getReviewDao().read(id).orElseThrow(()->new NotFoundException("User id: "+id));
+    public LocalDateTime update(String id, ReviewDto reviewDto) {
+        Review review = DaoFactory.getFactory().getReviewDao().read(id).orElseThrow(() -> new NotFoundException("User id: " + id));
         review.setTitle(reviewDto.getTitle()).setRating(reviewDto.getRating()).setText(reviewDto.getText()).setDate();
         DaoFactory.getFactory().getReviewDao().save(review);
         return review.getDate();

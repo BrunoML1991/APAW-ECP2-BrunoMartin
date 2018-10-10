@@ -12,28 +12,29 @@ public class ReviewApiController {
     private ReviewBusinessController reviewBusinessController = new ReviewBusinessController();
 
     public Object create(ReviewDto reviewDto) {
-        this.validate(reviewDto, "reviewDto");
-        this.validate(reviewDto.getTitle(), "title");
-        this.validate(reviewDto.getRating(), "rating");
-        this.validateRating(reviewDto.getRating());
+        this.validateReviewDto(reviewDto);
         return reviewBusinessController.create(reviewDto);
     }
 
-    public Object update (String id,ReviewDto reviewDto){
-        this.validate(reviewDto, "reviewDto");
-        this.validate(reviewDto.getTitle(), "title");
-        this.validate(reviewDto.getRating(), "rating");
-        this.validateRating(reviewDto.getRating());
-        return reviewBusinessController.update(id,reviewDto);
+    public Object update(String id, ReviewDto reviewDto) {
+        this.validateReviewDto(reviewDto);
+        return reviewBusinessController.update(id, reviewDto);
     }
 
-    private void validate(Object property, String message) {
+    private void validateReviewDto(ReviewDto reviewDto) {
+        this.validateNotNull(reviewDto, "reviewDto");
+        this.validateNotNull(reviewDto.getTitle(), "title");
+        this.validateNotNull(reviewDto.getRating(), "rating");
+        this.validateRatingLimits(reviewDto.getRating());
+    }
+
+    private void validateNotNull(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is NULL");
         }
     }
 
-    private void validateRating(int rating) {
+    private void validateRatingLimits(int rating) {
         if (0 > rating || rating > ReviewDto.LIMIT_RATING) {
             throw new IllegalArgumentException("Invalid rating " + rating);
         }
