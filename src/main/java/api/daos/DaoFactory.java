@@ -14,4 +14,7 @@ public abstract class DaoFactory {
     }
 
     public abstract ReviewDao getReviewDao();
+
+    public  abstract IconicCharacterDao getIconicCharacterDao ();
+
 }
