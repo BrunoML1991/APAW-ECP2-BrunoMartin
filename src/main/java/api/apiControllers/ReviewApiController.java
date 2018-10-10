@@ -7,6 +7,7 @@ import api.exceptions.ArgumentNotValidException;
 public class ReviewApiController {
 
     public static final String REVIEWS = "/reviews";
+    public static final String ID_ID = "/{id}";
 
     private ReviewBusinessController reviewBusinessController = new ReviewBusinessController();
 
@@ -16,6 +17,14 @@ public class ReviewApiController {
         this.validate(reviewDto.getRating(), "rating");
         this.validateRating(reviewDto.getRating());
         return reviewBusinessController.create(reviewDto);
+    }
+
+    public Object update (String id,ReviewDto reviewDto){
+        this.validate(reviewDto, "reviewDto");
+        this.validate(reviewDto.getTitle(), "title");
+        this.validate(reviewDto.getRating(), "rating");
+        this.validateRating(reviewDto.getRating());
+        return reviewBusinessController.update(id,reviewDto);
     }
 
     private void validate(Object property, String message) {

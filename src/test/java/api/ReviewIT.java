@@ -4,6 +4,7 @@ import api.apiControllers.ReviewApiController;
 import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
 import api.dtos.ReviewDto;
+import api.dtos.ReviewResponseIdAndDateDto;
 import http.Client;
 import http.HttpException;
 import http.HttpRequest;
@@ -49,6 +50,14 @@ public class ReviewIT {
     void testUserInvalidRequest() {
         HttpRequest request = HttpRequest.builder().path(ReviewApiController.REVIEWS + "/invalid").body(null).post();
         this.checkBAD_REQUEST(request);
+    }
+
+    @Test
+    void testUpdateReview (){
+        HttpRequest request = HttpRequest.builder().path(ReviewApiController.REVIEWS).body(new ReviewDto("Juego", 5)).post();
+        ReviewResponseIdAndDateDto response = (ReviewResponseIdAndDateDto) new Client().submit(request).getBody();
+        request = HttpRequest.builder().path(ReviewApiController.REVIEWS).path(ReviewApiController.ID_ID).expandPath(response.getId()).body(new ReviewDto("Game", 7)).put();
+        new Client().submit(request).getBody();
     }
 
     private void checkBAD_REQUEST(HttpRequest request) {
