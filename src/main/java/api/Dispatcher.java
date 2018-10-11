@@ -57,7 +57,7 @@ public class Dispatcher {
         } else if (httpRequest.isEqualsPath(IconicCharacterApiController.ICONIC_CHARACTER)) {
             httpResponse.setBody(this.iconicCharacterApiController.create((IconicCharacterDto) httpRequest.getBody()));
         } else if (httpRequest.isEqualsPath(VideogameApiController.VIDEOGAME)) {
-            httpResponse.setBody(videogameApiController.create((VideogameDto)httpRequest.getBody()));
+            httpResponse.setBody(videogameApiController.create((VideogameDto) httpRequest.getBody()));
         } else {
             this.requestInvalid(httpRequest);
         }

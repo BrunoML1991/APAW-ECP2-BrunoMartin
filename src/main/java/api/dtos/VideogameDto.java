@@ -16,6 +16,14 @@ public class VideogameDto implements Dto {
         this.iconicCharacterId = iconicCharacterId;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
@@ -26,14 +34,6 @@ public class VideogameDto implements Dto {
 
     public String getSynopsis() {
         return synopsis;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Category getCategory() {

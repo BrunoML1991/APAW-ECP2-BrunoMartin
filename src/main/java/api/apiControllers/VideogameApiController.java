@@ -18,9 +18,9 @@ public class VideogameApiController extends ValidatorApiController {
     @Override
     protected void validateDto(Dto dto) {
         VideogameDto videogameDto = (VideogameDto) dto;
-        this.validateNotNull(videogameDto,"videogameDto");
-        this.validateNotNull(videogameDto.getTitle(),"title");
-        this.validateNotNull(videogameDto.getIconicCharacterId(),"iconicCharacterId");
+        this.validateNotNull(videogameDto, "videogameDto");
+        this.validateNotNull(videogameDto.getTitle(), "title");
+        this.validateNotNull(videogameDto.getIconicCharacterId(), "iconicCharacterId");
     }
 
 }
