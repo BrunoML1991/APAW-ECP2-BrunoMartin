@@ -37,4 +37,8 @@ public class IconicCharacterIT extends RequestIT {
                 new IconicCharacterDto("Super Mario")));
     }
 
+    protected String getCreatePath() {
+        return createPath;
+    }
+
 }
