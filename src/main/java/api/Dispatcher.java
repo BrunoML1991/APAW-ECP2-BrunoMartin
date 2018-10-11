@@ -34,9 +34,10 @@ public class Dispatcher {
                 case PATCH:
                     throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
                 case DELETE:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doDelete(request);
+                    break;
                 default:
-                    throw new RequestInvalidException("method error: " + request.getMethod());
+                    this.requestInvalid(request);
             }
         } catch (ArgumentNotValidException | IllegalArgumentException | RequestInvalidException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
@@ -68,6 +69,14 @@ public class Dispatcher {
             httpResponse.setBody(this.reviewApiController.update(httpRequest.getPath(1), (ReviewDto) httpRequest.getBody()));
         } else {
             this.requestInvalid(httpRequest);
+        }
+    }
+
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID)) {
+            videogameApiController.delete(request.getPath(1));
+        } else {
+            this.requestInvalid(request);
         }
     }
 

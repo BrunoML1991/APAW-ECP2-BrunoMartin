@@ -6,6 +6,7 @@ import api.daos.memory.DaoMemoryFactory;
 import api.dtos.IconicCharacterDto;
 import api.dtos.VideogameDto;
 import http.Client;
+import http.HttpRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ public class VideogameIT extends RequestIT {
 
     IconicCharacterIT iconicCharacterIT = new IconicCharacterIT();
     private String createPath = VideogameApiController.VIDEOGAME;
+    private String deletePath = VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID;
     private String iconicCharacterId;
 
     @BeforeAll
@@ -57,9 +59,23 @@ public class VideogameIT extends RequestIT {
                 new VideogameDto("Odyssey", iconicCharacterId)));
     }
 
+    @Test
+    void testDeleteVideogame() {
+        this.checkOK(this.createDeleteRequest(this.createVideogame()));
+    }
+
     protected String createIconicCharacter(Object body) {
         return (String) new Client().submit(iconicCharacterIT.
                 createPostRequest(iconicCharacterIT.getCreatePath(), body)).getBody();
+    }
+
+    protected HttpRequest createDeleteRequest(String path) {
+        return HttpRequest.builder().path(deletePath).expandPath(path).delete();
+    }
+
+    protected String createVideogame() {
+        return (String) new Client().submit(this.createPostRequest(
+                createPath, new VideogameDto("Odyssey", iconicCharacterId))).getBody();
     }
 
 }

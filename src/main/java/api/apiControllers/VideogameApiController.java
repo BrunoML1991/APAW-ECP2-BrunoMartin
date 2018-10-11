@@ -9,10 +9,15 @@ public class VideogameApiController extends ValidatorApiController {
     private VideogameBusinessController videogameBusinessController = new VideogameBusinessController();
 
     public static final String VIDEOGAME = "/videogames";
+    public static final String ID_ID = "/{id}";
 
     public String create(VideogameDto videogameDto) {
         this.validateDto(videogameDto);
         return videogameBusinessController.create(videogameDto);
+    }
+
+    public void delete (String id){
+        videogameBusinessController.delete(id);
     }
 
     @Override

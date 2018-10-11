@@ -17,4 +17,8 @@ public class VideogameBusinessController {
         return videogame.getId();
     }
 
+    public void delete (String id){
+        DaoFactory.getFactory().getVideogameDao().deleteById(id);
+    }
+
 }
