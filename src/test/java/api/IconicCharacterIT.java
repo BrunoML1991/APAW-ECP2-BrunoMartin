@@ -4,12 +4,12 @@ import api.apiControllers.IconicCharacterApiController;
 import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
 import api.dtos.IconicCharacterDto;
-import http.Client;
-import http.HttpRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class IconicCharacterIT {
+public class IconicCharacterIT extends RequestIT {
+
+    private String createPath = IconicCharacterApiController.ICONIC_CHARACTER;
 
     @BeforeAll
     static void before() {
@@ -17,14 +17,24 @@ public class IconicCharacterIT {
     }
 
     @Test
-    void testCreateReview() {
-        this.createIconicCharacter();
+    void testCreateIconicCharacter() {
+        this.checkOK(this.createPostRequest(createPath, new IconicCharacterDto("Super Mario")));
     }
 
-    private String createIconicCharacter() {
-        HttpRequest request = HttpRequest.builder().path(IconicCharacterApiController.ICONIC_CHARACTER)
-                .body(new IconicCharacterDto("Super Mario")).post();
-        return (String) new Client().submit(request).getBody();
+    @Test
+    void testCreateIconicCharacterWithoutIconicCharacterDto() {
+        this.checkBAD_REQUEST(this.createPostRequest(createPath, null));
+    }
+
+    @Test
+    void testCreateIconicCharacterWithoutName() {
+        this.checkBAD_REQUEST(this.createPostRequest(createPath, new IconicCharacterDto(null)));
+    }
+
+    @Test
+    void testIconicCharacterInvalidRequest() {
+        this.checkBAD_REQUEST(this.createPostRequest(createPath + "/invalid",
+                new IconicCharacterDto("Super Mario")));
     }
 
 }

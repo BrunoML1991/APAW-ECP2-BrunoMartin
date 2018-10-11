@@ -2,7 +2,7 @@ package api.dtos;
 
 import java.time.LocalDateTime;
 
-public class ReviewDto {
+public class ReviewDto implements Dto{
 
 
     private String id;
