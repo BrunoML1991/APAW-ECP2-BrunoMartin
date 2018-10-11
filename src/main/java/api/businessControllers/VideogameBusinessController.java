@@ -18,8 +18,9 @@ public class VideogameBusinessController {
     }
 
     public void delete(String id) {
-        DaoFactory.getFactory().getVideogameDao().read(id).orElseThrow(() -> new NotFoundException("Videogame id: " + id));
-        DaoFactory.getFactory().getVideogameDao().deleteById(id);
+        Videogame videogame = DaoFactory.getFactory().getVideogameDao().read(id).
+                orElseThrow(() -> new NotFoundException("Videogame id: " + id));
+        DaoFactory.getFactory().getVideogameDao().deleteById(videogame.getId());
     }
 
 }
