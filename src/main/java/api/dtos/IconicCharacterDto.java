@@ -1,16 +1,18 @@
-package api.entities;
+package api.dtos;
+
+import api.entities.Review;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IconicCharacter {
+public class IconicCharacterDto implements Dto{
 
     private String id;
     private String name;
     private String role;
     private List<Review> reviews = new ArrayList<>();
 
-    public IconicCharacter(String name) {
+    public IconicCharacterDto(String name) {
         this.name = name;
     }
 
@@ -35,29 +37,8 @@ public class IconicCharacter {
         return role;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
     public void setId(String id) {
         this.id = id;
     }
 
-    public IconicCharacter setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public IconicCharacter setRole(String role) {
-        this.role = role;
-        return this;
-    }
-
-    public void addReview(Review review) {
-        this.reviews.add(review);
-    }
-
-    public void removeReview(Review review) {
-        this.reviews.remove(Integer.parseInt(review.getId()));
-    }
 }

@@ -1,6 +1,8 @@
 package api;
 
+import api.apiControllers.IconicCharacterApiController;
 import api.apiControllers.ReviewApiController;
+import api.dtos.IconicCharacterDto;
 import api.dtos.ReviewDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
@@ -12,6 +14,7 @@ import http.HttpStatus;
 public class Dispatcher {
 
     ReviewApiController reviewApiController = new ReviewApiController();
+    IconicCharacterApiController iconicCharacterApiController = new IconicCharacterApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -48,6 +51,8 @@ public class Dispatcher {
     private void doPost(HttpRequest httpRequest, HttpResponse httpResponse) {
         if (httpRequest.isEqualsPath(ReviewApiController.REVIEWS)) {
             httpResponse.setBody(this.reviewApiController.create((ReviewDto) httpRequest.getBody()));
+        } else if (httpRequest.isEqualsPath(IconicCharacterApiController.ICONIC_CHARACTER)) {
+            httpResponse.setBody(this.iconicCharacterApiController.create((IconicCharacterDto) httpRequest.getBody()));
         } else {
             this.requestInvalid(httpRequest);
         }

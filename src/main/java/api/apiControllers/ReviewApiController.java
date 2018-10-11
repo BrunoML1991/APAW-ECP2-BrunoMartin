@@ -1,10 +1,10 @@
 package api.apiControllers;
 
 import api.businessControllers.ReviewBusinessController;
+import api.dtos.Dto;
 import api.dtos.ReviewDto;
-import api.exceptions.ArgumentNotValidException;
 
-public class ReviewApiController {
+public class ReviewApiController extends ValidatorApiController {
 
     public static final String REVIEWS = "/reviews";
     public static final String ID_ID = "/{id}";
@@ -12,26 +12,21 @@ public class ReviewApiController {
     private ReviewBusinessController reviewBusinessController = new ReviewBusinessController();
 
     public Object create(ReviewDto reviewDto) {
-        this.validateReviewDto(reviewDto);
+        this.validateDto(reviewDto);
         return reviewBusinessController.create(reviewDto);
     }
 
     public Object update(String id, ReviewDto reviewDto) {
-        this.validateReviewDto(reviewDto);
+        this.validateDto(reviewDto);
         return reviewBusinessController.update(id, reviewDto);
     }
 
-    private void validateReviewDto(ReviewDto reviewDto) {
+    protected void validateDto(Dto dto) {
+        ReviewDto reviewDto = (ReviewDto) dto;
         this.validateNotNull(reviewDto, "reviewDto");
         this.validateNotNull(reviewDto.getTitle(), "title");
         this.validateNotNull(reviewDto.getRating(), "rating");
         this.validateRatingLimits(reviewDto.getRating());
-    }
-
-    private void validateNotNull(Object property, String message) {
-        if (property == null) {
-            throw new ArgumentNotValidException(message + " is NULL");
-        }
     }
 
     private void validateRatingLimits(int rating) {
