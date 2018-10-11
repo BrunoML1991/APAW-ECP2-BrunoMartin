@@ -10,14 +10,15 @@ public class VideogameBusinessController {
     public String create(VideogameDto videogameDto) {
         Videogame videogame = new Videogame(videogameDto.getTitle());
         videogame.setIconicCharacter(DaoFactory.getFactory().getIconicCharacterDao().read(videogameDto.getIconicCharacterId())
-                .orElseThrow(() -> new NotFoundException("User id: " + videogameDto.getIconicCharacterId())));
+                .orElseThrow(() -> new NotFoundException("Videogame id: " + videogameDto.getIconicCharacterId())));
         videogame.setSynopsis(videogameDto.getSynopsis()).setCompany(videogameDto.getCompany())
                 .setCategory(videogameDto.getCategory());
         DaoFactory.getFactory().getVideogameDao().save(videogame);
         return videogame.getId();
     }
 
-    public void delete (String id){
+    public void delete(String id) {
+        DaoFactory.getFactory().getVideogameDao().read(id).orElseThrow(() -> new NotFoundException("Videogame id: " + id));
         DaoFactory.getFactory().getVideogameDao().deleteById(id);
     }
 

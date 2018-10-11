@@ -64,6 +64,11 @@ public class VideogameIT extends RequestIT {
         this.checkOK(this.createDeleteRequest(this.createVideogame()));
     }
 
+    @Test
+    void testDeleteVideogameNotFound() {
+        this.checkNOT_FOUND(this.createDeleteRequest("500"));
+    }
+
     protected String createIconicCharacter(Object body) {
         return (String) new Client().submit(iconicCharacterIT.
                 createPostRequest(iconicCharacterIT.getCreatePath(), body)).getBody();

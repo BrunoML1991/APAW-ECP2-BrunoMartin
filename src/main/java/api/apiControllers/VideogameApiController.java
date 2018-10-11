@@ -16,7 +16,7 @@ public class VideogameApiController extends ValidatorApiController {
         return videogameBusinessController.create(videogameDto);
     }
 
-    public void delete (String id){
+    public void delete(String id) {
         videogameBusinessController.delete(id);
     }
 
