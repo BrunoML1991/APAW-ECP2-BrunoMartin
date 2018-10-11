@@ -1,16 +1,27 @@
-package api.entities;
+package api.dtos;
 
-public class Videogame {
+import api.entities.Category;
+
+public class VideogameDto implements Dto {
 
     private String id;
     private String title;
     private String synopsis;
     private String company;
-    private IconicCharacter iconicCharacter;
+    private String iconicCharacterId;
     private Category category;
 
-    public Videogame(String title) {
+    public VideogameDto(String title, String iconicCharacterId) {
         this.title = title;
+        this.iconicCharacterId = iconicCharacterId;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getId() {
@@ -25,45 +36,37 @@ public class Videogame {
         return synopsis;
     }
 
-    public String getCompany() {
-        return company;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Videogame setSynopsis(String synopsis) {
+    public VideogameDto setSynopsis(String synopsis) {
         this.synopsis = synopsis;
         return this;
     }
 
-    public Videogame setCompany(String company) {
+    public VideogameDto setCompany(String company) {
         this.company = company;
         return this;
     }
 
-    public void setIconicCharacter(IconicCharacter iconicCharacter) {
-        this.iconicCharacter = iconicCharacter;
-    }
-
-    public Videogame setCategory(Category category) {
+    public VideogameDto setCategory(Category category) {
         this.category = category;
         return this;
     }
 
+    public String getIconicCharacterId() {
+        return iconicCharacterId;
+    }
+
     @Override
     public String toString() {
-        return "Videogame{" +
+        return "VideogameDto{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", synopsis='" + synopsis + '\'' +
                 ", company='" + company + '\'' +
-                ", iconicCharacter=" + iconicCharacter +
+                ", iconicCharacterId='" + iconicCharacterId + '\'' +
                 ", category=" + category +
                 '}';
     }

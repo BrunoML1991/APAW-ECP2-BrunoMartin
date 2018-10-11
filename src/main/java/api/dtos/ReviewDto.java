@@ -1,8 +1,9 @@
-package api.entities;
+package api.dtos;
 
 import java.time.LocalDateTime;
 
-public class Review {
+public class ReviewDto implements Dto{
+
 
     private String id;
     private String title;
@@ -11,43 +12,29 @@ public class Review {
     private LocalDateTime date;
     public static final int LIMIT_RATING = 10;
 
-    public Review(String title) {
+    public ReviewDto(String title, int rating) {
         this.title = title;
+        this.rating = rating;
     }
 
     public String getId() {
         return id;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public String getTitle() {
+        return title;
     }
 
-    public Review setText(String text) {
-        this.text = text;
-        return this;
+    public String getText() {
+        return text;
     }
 
-    public Review setRating(int rating) {
-        if (0 > rating || rating > Review.LIMIT_RATING) {
-            throw new IllegalArgumentException("Invalid rating" + rating);
-        }
-        this.rating = rating;
-        return this;
+    public int getRating() {
+        return rating;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Review setDate() {
-        this.date = LocalDateTime.now();
-        return this;
-    }
-
-    public Review setTitle(String title) {
-        this.title = title;
-        return this;
     }
 
     @Override

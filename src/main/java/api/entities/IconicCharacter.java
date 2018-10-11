@@ -10,6 +10,10 @@ public class IconicCharacter {
     private String role;
     private List<Review> reviews = new ArrayList<>();
 
+    public IconicCharacter(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "IconicCharacter{" +
@@ -39,19 +43,21 @@ public class IconicCharacter {
         this.id = id;
     }
 
-    public void setName(String name) {
+    public IconicCharacter setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public void setRole(String role) {
+    public IconicCharacter setRole(String role) {
         this.role = role;
+        return this;
     }
 
     public void addReview(Review review) {
         this.reviews.add(review);
     }
 
-    public void removeReview (Review review){
+    public void removeReview(Review review) {
         this.reviews.remove(Integer.parseInt(review.getId()));
     }
 }
