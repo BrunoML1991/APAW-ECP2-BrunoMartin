@@ -7,7 +7,6 @@ import java.util.List;
 
 public class IconicCharacterDto implements Dto{
 
-
     private String id;
     private String name;
     private String role;
@@ -26,20 +25,20 @@ public class IconicCharacterDto implements Dto{
                 '}';
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
