@@ -11,6 +11,6 @@ public abstract class ValidatorApiController {
         }
     }
 
-    protected abstract void validateDto (Dto dto);
+    protected abstract void validateDto(Dto dto);
 
 }

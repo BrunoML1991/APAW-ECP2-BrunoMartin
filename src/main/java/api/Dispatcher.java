@@ -2,8 +2,10 @@ package api;
 
 import api.apiControllers.IconicCharacterApiController;
 import api.apiControllers.ReviewApiController;
+import api.apiControllers.VideogameApiController;
 import api.dtos.IconicCharacterDto;
 import api.dtos.ReviewDto;
+import api.dtos.VideogameDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -15,6 +17,7 @@ public class Dispatcher {
 
     ReviewApiController reviewApiController = new ReviewApiController();
     IconicCharacterApiController iconicCharacterApiController = new IconicCharacterApiController();
+    VideogameApiController videogameApiController = new VideogameApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -53,6 +56,8 @@ public class Dispatcher {
             httpResponse.setBody(this.reviewApiController.create((ReviewDto) httpRequest.getBody()));
         } else if (httpRequest.isEqualsPath(IconicCharacterApiController.ICONIC_CHARACTER)) {
             httpResponse.setBody(this.iconicCharacterApiController.create((IconicCharacterDto) httpRequest.getBody()));
+        } else if (httpRequest.isEqualsPath(VideogameApiController.VIDEOGAME)) {
+            httpResponse.setBody(videogameApiController.create((VideogameDto) httpRequest.getBody()));
         } else {
             this.requestInvalid(httpRequest);
         }

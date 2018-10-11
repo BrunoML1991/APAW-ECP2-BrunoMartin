@@ -3,11 +3,13 @@ package api.daos.memory;
 import api.daos.DaoFactory;
 import api.daos.IconicCharacterDao;
 import api.daos.ReviewDao;
+import api.daos.VideogameDao;
 
 public class DaoMemoryFactory extends DaoFactory {
 
     private ReviewDao reviewDao;
     private IconicCharacterDao iconicCharacterDao;
+    private VideogameDao videogameDao;
 
     @Override
     public ReviewDao getReviewDao() {
@@ -20,8 +22,16 @@ public class DaoMemoryFactory extends DaoFactory {
     @Override
     public IconicCharacterDao getIconicCharacterDao() {
         if (iconicCharacterDao == null) {
-            iconicCharacterDao = new IconicCharacterMemory();
+            iconicCharacterDao = new IconicCharacterDaoMemory();
         }
         return iconicCharacterDao;
+    }
+
+    @Override
+    public VideogameDao getVideogameDao() {
+        if (videogameDao == null) {
+            videogameDao = new VideogameDaoMemory();
+        }
+        return videogameDao;
     }
 }

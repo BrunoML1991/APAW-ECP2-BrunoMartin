@@ -5,9 +5,9 @@ import api.entities.IconicCharacter;
 
 import java.util.HashMap;
 
-public class IconicCharacterMemory extends GenericDaoMemory<IconicCharacter> implements IconicCharacterDao {
+public class IconicCharacterDaoMemory extends GenericDaoMemory<IconicCharacter> implements IconicCharacterDao {
 
-    public IconicCharacterMemory() {
+    public IconicCharacterDaoMemory() {
         super(new HashMap<>());
     }
 
