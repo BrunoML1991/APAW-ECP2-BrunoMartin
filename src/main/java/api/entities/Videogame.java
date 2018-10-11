@@ -10,7 +10,6 @@ public class Videogame {
     private Category category;
 
     public Videogame(String title) {
-        this.id = id;
         this.title = title;
     }
 
