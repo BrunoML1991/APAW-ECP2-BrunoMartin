@@ -7,6 +7,7 @@ import java.util.List;
 
 public class IconicCharacterDto implements Dto{
 
+
     private String id;
     private String name;
     private String role;
