@@ -17,7 +17,7 @@ public class VideogameIT extends RequestIT {
     IconicCharacterIT iconicCharacterIT = new IconicCharacterIT();
     private String createPath = VideogameApiController.VIDEOGAME;
     private String deletePath = VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID;
-    private String patchPath = VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID+VideogameApiController.CATEGORY;
+    private String patchPath = VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID + VideogameApiController.CATEGORY;
     private String iconicCharacterId;
 
     @BeforeAll
@@ -85,8 +85,23 @@ public class VideogameIT extends RequestIT {
     }
 
     @Test
-    void testPatchVideogame (){
-        this.checkOK(this.createPatchRequest(this.createVideogame("Dark Souls"),Category.ACTION));
+    void testPatchVideogame() {
+        this.checkOK(this.createPatchRequest(this.createVideogame("Dark Souls"), Category.ACTION));
+    }
+
+    @Test
+    void testPatchVideogameWithoutCategory() {
+        this.checkBAD_REQUEST(this.createPatchRequest(this.createVideogame("Dark Souls"), null));
+    }
+
+    @Test
+    void testPatchInvalidRequest() {
+        this.checkBAD_REQUEST(this.createPatchRequest("/invalid", Category.ACTION));
+    }
+
+    @Test
+    void testPatchVideogameNotFound() {
+        this.checkNOT_FOUND(this.createPatchRequest("asdad", Category.ACTION));
     }
 
     protected HttpRequest createDeleteRequest(String path) {
@@ -97,7 +112,7 @@ public class VideogameIT extends RequestIT {
         return HttpRequest.builder().path(createPath).get();
     }
 
-    protected HttpRequest createPatchRequest (String path, Category category){
+    protected HttpRequest createPatchRequest(String path, Category category) {
         return HttpRequest.builder().path(patchPath).expandPath(path).body(category).patch();
     }
 

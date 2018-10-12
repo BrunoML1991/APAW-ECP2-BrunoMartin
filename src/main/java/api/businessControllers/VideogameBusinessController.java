@@ -38,7 +38,7 @@ public class VideogameBusinessController {
         return videogameResponseIdAndTitleList;
     }
 
-    public void updateCategory (String id, Category category){
+    public void updateCategory(String id, Category category) {
         Videogame videogame = DaoFactory.getFactory().getVideogameDao().read(id).orElseThrow(() -> new NotFoundException("Videogame id: " + id));
         videogame.setCategory(category);
         DaoFactory.getFactory().getVideogameDao().save(videogame);

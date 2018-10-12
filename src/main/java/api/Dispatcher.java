@@ -91,10 +91,10 @@ public class Dispatcher {
         }
     }
 
-    private void doPatch (HttpRequest request){
-        if (request.isEqualsPath(VideogameApiController.VIDEOGAME+VideogameApiController.ID_ID+VideogameApiController.CATEGORY)){
-            videogameApiController.updateCategory(request.getPath(1),(Category)request.getBody());
-        }else {
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID + VideogameApiController.CATEGORY)) {
+            videogameApiController.updateCategory(request.getPath(1), (Category) request.getBody());
+        } else {
             this.requestInvalid(request);
         }
     }

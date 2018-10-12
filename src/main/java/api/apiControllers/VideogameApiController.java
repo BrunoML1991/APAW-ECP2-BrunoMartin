@@ -29,9 +29,9 @@ public class VideogameApiController extends ValidatorApiController {
         return videogameBusinessController.readAll();
     }
 
-    public void updateCategory (String id, Category category){
-        this.validateNotNull(category,"category");
-        videogameBusinessController.updateCategory(id,category);
+    public void updateCategory(String id, Category category) {
+        this.validateNotNull(category, "category");
+        videogameBusinessController.updateCategory(id, category);
     }
 
     @Override
