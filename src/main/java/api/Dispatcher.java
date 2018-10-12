@@ -6,6 +6,7 @@ import api.apiControllers.VideogameApiController;
 import api.dtos.IconicCharacterDto;
 import api.dtos.ReviewDto;
 import api.dtos.VideogameDto;
+import api.entities.Category;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -27,16 +28,19 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doGet(request, response);
+                    break;
                 case PUT:
                     this.doPut(request, response);
                     break;
                 case PATCH:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doPatch(request);
+                    break;
                 case DELETE:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doDelete(request);
+                    break;
                 default:
-                    throw new RequestInvalidException("method error: " + request.getMethod());
+                    this.requestInvalid(request);
             }
         } catch (ArgumentNotValidException | IllegalArgumentException | RequestInvalidException exception) {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
@@ -45,7 +49,6 @@ public class Dispatcher {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
-            exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -68,6 +71,32 @@ public class Dispatcher {
             httpResponse.setBody(this.reviewApiController.update(httpRequest.getPath(1), (ReviewDto) httpRequest.getBody()));
         } else {
             this.requestInvalid(httpRequest);
+        }
+    }
+
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID)) {
+            videogameApiController.delete(request.getPath(1));
+        } else {
+            this.requestInvalid(request);
+        }
+    }
+
+    private void doGet(HttpRequest request, HttpResponse response) {
+        if (request.isEqualsPath(VideogameApiController.VIDEOGAME)) {
+            response.setBody(videogameApiController.readAll());
+        } else if (request.isEqualsPath(ReviewApiController.REVIEWS + ReviewApiController.SEARCH)) {
+            response.setBody(reviewApiController.find(request.getParams().get("q")));
+        } else {
+            this.requestInvalid(request);
+        }
+    }
+
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID + VideogameApiController.CATEGORY)) {
+            videogameApiController.updateCategory(request.getPath(1), (Category) request.getBody());
+        } else {
+            this.requestInvalid(request);
         }
     }
 
