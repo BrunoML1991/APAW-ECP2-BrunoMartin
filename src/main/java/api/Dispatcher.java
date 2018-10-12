@@ -6,6 +6,7 @@ import api.apiControllers.VideogameApiController;
 import api.dtos.IconicCharacterDto;
 import api.dtos.ReviewDto;
 import api.dtos.VideogameDto;
+import api.entities.Videogame;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -27,7 +28,8 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doGet(request,response);
+                    break;
                 case PUT:
                     this.doPut(request, response);
                     break;
@@ -76,6 +78,14 @@ public class Dispatcher {
         if (request.isEqualsPath(VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID)) {
             videogameApiController.delete(request.getPath(1));
         } else {
+            this.requestInvalid(request);
+        }
+    }
+
+    private void doGet (HttpRequest request, HttpResponse response){
+        if(request.isEqualsPath(VideogameApiController.VIDEOGAME)){
+            response.setBody(videogameApiController.readAll());
+        }else {
             this.requestInvalid(request);
         }
     }
