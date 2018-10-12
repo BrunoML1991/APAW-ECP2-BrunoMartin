@@ -61,7 +61,7 @@ public class VideogameIT extends RequestIT {
 
     @Test
     void testDeleteVideogame() {
-        this.checkOK(this.createDeleteRequest(this.createVideogame()));
+        this.checkOK(this.createDeleteRequest(this.createVideogame("Odyssey")));
     }
 
     @Test
@@ -69,18 +69,35 @@ public class VideogameIT extends RequestIT {
         this.checkNOT_FOUND(this.createDeleteRequest("500"));
     }
 
-    protected String createIconicCharacter(Object body) {
-        return (String) new Client().submit(iconicCharacterIT.
-                createPostRequest(iconicCharacterIT.getCreatePath(), body)).getBody();
+    @Test
+    void testGetAllVideogames() {
+        this.createVideogame("Red Dead Redemption");
+        this.createVideogame("Dark Souls");
+        this.checkOK(this.createGetRequest());
+    }
+
+    @Test
+    void testGetNotFound() {
+        DaoFactory.setFactory(new DaoMemoryFactory());
+        this.checkNOT_FOUND(this.createGetRequest());
     }
 
     protected HttpRequest createDeleteRequest(String path) {
         return HttpRequest.builder().path(deletePath).expandPath(path).delete();
     }
 
-    protected String createVideogame() {
+    protected HttpRequest createGetRequest() {
+        return HttpRequest.builder().path(createPath).get();
+    }
+
+    protected String createIconicCharacter(Object body) {
+        return (String) new Client().submit(iconicCharacterIT.
+                createPostRequest(iconicCharacterIT.getCreatePath(), body)).getBody();
+    }
+
+    protected String createVideogame(String title) {
         return (String) new Client().submit(this.createPostRequest(
-                createPath, new VideogameDto("Odyssey", iconicCharacterId))).getBody();
+                createPath, new VideogameDto(title, iconicCharacterId))).getBody();
     }
 
 }

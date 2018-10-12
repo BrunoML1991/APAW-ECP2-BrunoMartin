@@ -27,7 +27,8 @@ public class Dispatcher {
                     this.doPost(request, response);
                     break;
                 case GET:
-                    throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+                    this.doGet(request, response);
+                    break;
                 case PUT:
                     this.doPut(request, response);
                     break;
@@ -75,6 +76,14 @@ public class Dispatcher {
     private void doDelete(HttpRequest request) {
         if (request.isEqualsPath(VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID)) {
             videogameApiController.delete(request.getPath(1));
+        } else {
+            this.requestInvalid(request);
+        }
+    }
+
+    private void doGet(HttpRequest request, HttpResponse response) {
+        if (request.isEqualsPath(VideogameApiController.VIDEOGAME)) {
+            response.setBody(videogameApiController.readAll());
         } else {
             this.requestInvalid(request);
         }

@@ -3,6 +3,9 @@ package api.apiControllers;
 import api.businessControllers.VideogameBusinessController;
 import api.dtos.Dto;
 import api.dtos.VideogameDto;
+import api.dtos.VideogameResponseIdAndTitle;
+
+import java.util.List;
 
 public class VideogameApiController extends ValidatorApiController {
 
@@ -18,6 +21,10 @@ public class VideogameApiController extends ValidatorApiController {
 
     public void delete(String id) {
         videogameBusinessController.delete(id);
+    }
+
+    public List<VideogameResponseIdAndTitle> readAll() {
+        return videogameBusinessController.readAll();
     }
 
     @Override
