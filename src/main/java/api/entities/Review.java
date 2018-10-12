@@ -23,6 +23,14 @@ public class Review {
         return date;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public Review setText(String text) {
         this.text = text;
         return this;

@@ -49,7 +49,6 @@ public class Dispatcher {
             response.setBody(String.format(ERROR_MESSAGE, exception.getMessage()));
             response.setStatus(HttpStatus.NOT_FOUND);
         } catch (Exception exception) {  // Unexpected
-            exception.printStackTrace();
             response.setBody(String.format(ERROR_MESSAGE, exception));
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -86,6 +85,8 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(VideogameApiController.VIDEOGAME)) {
             response.setBody(videogameApiController.readAll());
+        } else if (request.isEqualsPath(ReviewApiController.REVIEWS + ReviewApiController.SEARCH)) {
+            response.setBody(reviewApiController.find(request.getParams().get("q")));
         } else {
             this.requestInvalid(request);
         }
