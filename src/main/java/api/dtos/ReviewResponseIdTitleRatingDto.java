@@ -8,7 +8,7 @@ public class ReviewResponseIdTitleRatingDto {
     private String title;
     private int rating;
 
-    public ReviewResponseIdTitleRatingDto(Review review){
+    public ReviewResponseIdTitleRatingDto(Review review) {
         this.id = review.getId();
         this.title = review.getTitle();
         this.rating = review.getRating();

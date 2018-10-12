@@ -12,7 +12,7 @@ public class ReviewApiController extends ValidatorApiController {
 
     public static final String REVIEWS = "/reviews";
     public static final String ID_ID = "/{id}";
-    public static final String SEARCH= "/search";
+    public static final String SEARCH = "/search";
 
     private ReviewBusinessController reviewBusinessController = new ReviewBusinessController();
 
@@ -26,9 +26,9 @@ public class ReviewApiController extends ValidatorApiController {
         return reviewBusinessController.update(id, reviewDto);
     }
 
-    public List<ReviewResponseIdTitleRatingDto> find (String query){
-        this.validateNotNull(query,"query param q");
-        if (!"rating".equals(query.split(":>=")[0])){
+    public List<ReviewResponseIdTitleRatingDto> find(String query) {
+        this.validateNotNull(query, "query param q");
+        if (!"rating".equals(query.split(":>=")[0])) {
             throw new ArgumentNotValidException("query param q is incorrect, missing 'rating:>='");
         }
         return reviewBusinessController.findByRatingGreaterThanEqual(Integer.valueOf(query.split(":>=")[1]));

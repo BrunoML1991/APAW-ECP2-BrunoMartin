@@ -109,7 +109,7 @@ public class ReviewIT extends RequestIT {
         new Client().submit(this.createPostRequest(createPath, body));
     }
 
-    private void createReviewsToTest (){
+    private void createReviewsToTest() {
         this.createReview(new ReviewDto("Dark Souls", 8));
         this.createReview(new ReviewDto("Juego", 5));
         this.createReview(new ReviewDto("Odyssey", 10));
