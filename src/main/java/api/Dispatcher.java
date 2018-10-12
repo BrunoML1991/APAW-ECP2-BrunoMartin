@@ -86,7 +86,9 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(VideogameApiController.VIDEOGAME)) {
             response.setBody(videogameApiController.readAll());
-        } else {
+        } else if (request.isEqualsPath(ReviewApiController.REVIEWS+ReviewApiController.SEARCH)){
+            response.setBody(reviewApiController.find(request.getParams().get("q")));
+        }else {
             this.requestInvalid(request);
         }
     }
