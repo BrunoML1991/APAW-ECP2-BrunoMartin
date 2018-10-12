@@ -3,6 +3,7 @@ package api.businessControllers;
 import api.daos.DaoFactory;
 import api.dtos.VideogameDto;
 import api.dtos.VideogameResponseIdAndTitle;
+import api.entities.Category;
 import api.entities.Videogame;
 import api.exceptions.NotFoundException;
 
@@ -35,6 +36,12 @@ public class VideogameBusinessController {
             throw new NotFoundException("No videogame found");
         }
         return videogameResponseIdAndTitleList;
+    }
+
+    public void updateCategory(String id, Category category) {
+        Videogame videogame = DaoFactory.getFactory().getVideogameDao().read(id).orElseThrow(() -> new NotFoundException("Videogame id: " + id));
+        videogame.setCategory(category);
+        DaoFactory.getFactory().getVideogameDao().save(videogame);
     }
 
 }

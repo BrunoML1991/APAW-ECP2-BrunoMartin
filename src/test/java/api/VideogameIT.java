@@ -5,6 +5,7 @@ import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
 import api.dtos.IconicCharacterDto;
 import api.dtos.VideogameDto;
+import api.entities.Category;
 import http.Client;
 import http.HttpRequest;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +17,7 @@ public class VideogameIT extends RequestIT {
     IconicCharacterIT iconicCharacterIT = new IconicCharacterIT();
     private String createPath = VideogameApiController.VIDEOGAME;
     private String deletePath = VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID;
+    private String patchPath = VideogameApiController.VIDEOGAME + VideogameApiController.ID_ID + VideogameApiController.CATEGORY;
     private String iconicCharacterId;
 
     @BeforeAll
@@ -82,12 +84,36 @@ public class VideogameIT extends RequestIT {
         this.checkNOT_FOUND(this.createGetRequest());
     }
 
+    @Test
+    void testPatchVideogame() {
+        this.checkOK(this.createPatchRequest(this.createVideogame("Dark Souls"), Category.ACTION));
+    }
+
+    @Test
+    void testPatchVideogameWithoutCategory() {
+        this.checkBAD_REQUEST(this.createPatchRequest(this.createVideogame("Dark Souls"), null));
+    }
+
+    @Test
+    void testPatchInvalidRequest() {
+        this.checkBAD_REQUEST(this.createPatchRequest("/invalid", Category.ACTION));
+    }
+
+    @Test
+    void testPatchVideogameNotFound() {
+        this.checkNOT_FOUND(this.createPatchRequest("asdad", Category.ACTION));
+    }
+
     protected HttpRequest createDeleteRequest(String path) {
         return HttpRequest.builder().path(deletePath).expandPath(path).delete();
     }
 
     protected HttpRequest createGetRequest() {
         return HttpRequest.builder().path(createPath).get();
+    }
+
+    protected HttpRequest createPatchRequest(String path, Category category) {
+        return HttpRequest.builder().path(patchPath).expandPath(path).body(category).patch();
     }
 
     protected String createIconicCharacter(Object body) {
