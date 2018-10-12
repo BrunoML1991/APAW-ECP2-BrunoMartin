@@ -27,12 +27,12 @@ public class VideogameBusinessController {
         DaoFactory.getFactory().getVideogameDao().deleteById(videogame.getId());
     }
 
-    public List<VideogameResponseIdAndTitle> readAll (){
+    public List<VideogameResponseIdAndTitle> readAll() {
         List<VideogameResponseIdAndTitle> videogameResponseIdAndTitleList = DaoFactory.getFactory().getVideogameDao().findAll().stream().map(
-                videogame -> new VideogameResponseIdAndTitle(videogame.getId(),videogame.getTitle())
+                videogame -> new VideogameResponseIdAndTitle(videogame.getId(), videogame.getTitle())
         ).collect(Collectors.toList());
-        if(videogameResponseIdAndTitleList.isEmpty()){
-             throw new NotFoundException("No videogame found");
+        if (videogameResponseIdAndTitleList.isEmpty()) {
+            throw new NotFoundException("No videogame found");
         }
         return videogameResponseIdAndTitleList;
     }

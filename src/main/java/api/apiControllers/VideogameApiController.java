@@ -23,7 +23,7 @@ public class VideogameApiController extends ValidatorApiController {
         videogameBusinessController.delete(id);
     }
 
-    public List<VideogameResponseIdAndTitle> readAll (){
+    public List<VideogameResponseIdAndTitle> readAll() {
         return videogameBusinessController.readAll();
     }
 

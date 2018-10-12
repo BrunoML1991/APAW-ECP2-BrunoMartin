@@ -5,7 +5,7 @@ public class VideogameResponseIdAndTitle {
     private String id;
     private String title;
 
-    public VideogameResponseIdAndTitle (String id, String title){
+    public VideogameResponseIdAndTitle(String id, String title) {
         this.id = id;
         this.title = title;
     }

@@ -70,14 +70,14 @@ public class VideogameIT extends RequestIT {
     }
 
     @Test
-    void testGetAllVideogames (){
+    void testGetAllVideogames() {
         this.createVideogame("Red Dead Redemption");
         this.createVideogame("Dark Souls");
         this.checkOK(this.createGetRequest());
     }
 
     @Test
-    void testGetNotFound (){
+    void testGetNotFound() {
         DaoFactory.setFactory(new DaoMemoryFactory());
         this.checkNOT_FOUND(this.createGetRequest());
     }
@@ -86,8 +86,8 @@ public class VideogameIT extends RequestIT {
         return HttpRequest.builder().path(deletePath).expandPath(path).delete();
     }
 
-    protected HttpRequest createGetRequest (){
-        return  HttpRequest.builder().path(createPath).get();
+    protected HttpRequest createGetRequest() {
+        return HttpRequest.builder().path(createPath).get();
     }
 
     protected String createIconicCharacter(Object body) {
